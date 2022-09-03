@@ -2,34 +2,26 @@
 
 //STK PUSH 
 
-if(isset($_POST['submit'])){
 
-
-  date_default_timezone_set('Africa/Nairobi');
+date_default_timezone_set('Africa/Nairobi');
 
   # access token
   $consumerKey = '9Ga7mAhyey2z7fA8knAwH0ZJaNTmviTc'; //Fill with your app Consumer Key
   $consumerSecret = 'cx3IN7lqg5dE5Znl'; // Fill with your app Secret
 
-  # define the variales
-  # provide the following details, this part is found on your test credentials on the developer account
-  $BusinessShortCode = '174379';
+  
+  $BusinessShortCode = '174379';//Till Number
   $Passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';  
   
-  /*
-    This are your info, for
-    $PartyA should be the ACTUAL clients phone number or your phone number, format 2547********
-    $AccountRefference, it maybe invoice number, account number etc on production systems, but for test just put anything
-    TransactionDesc can be anything, probably a better description of or the transaction
-    $Amount this is the total invoiced amount, Any amount here will be 
-    actually deducted from a clients side/your test phone number once the PIN has been entered to authorize the transaction. 
-    for developer/test accounts, this money will be reversed automatically by midnight.
-  */
+ 
   
-   $PartyA = $_POST['phone']; // This is your phone number, 
-  $AccountReference = '2255';
+   //$PartyA = $_POST['phone']; // This is your phone number, 
+   $PartyA='0723782739';
+  $AccountReference = 'SilverStain Limited';
   $TransactionDesc = 'Test Payment';
-  $Amount = $_POST['amount'];;
+  //$Amount = $_POST['amount'];
+  $Amount = 5000;
+
  
   # Get the timestamp, format YYYYmmddhms -> 20181004151020
   $Timestamp = date('YmdHis');    
@@ -45,7 +37,7 @@ if(isset($_POST['submit'])){
   $initiate_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 
   # callback url
-  $CallBackURL = 'https://morning-basin-87523.herokuapp.com/callback_url.php'; //URL TO THE RESPONSE GIVEN 
+  $CallBackURL = 'https://6bd9-196-207-166-126.ap.ngrok.io/callback_url.php'; //URL TO THE RESPONSE GIVEN 
 
   $curl = curl_init($access_token_url);
   curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -89,5 +81,5 @@ if(isset($_POST['submit'])){
   print_r($curl_response);
 
   echo $curl_response;
-};
+
 ?>
